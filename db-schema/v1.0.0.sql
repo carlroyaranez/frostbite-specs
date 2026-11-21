@@ -5,7 +5,7 @@
 -- `id` is a server-local identity/index key; `uuid` is the portable row identity.
 --
 -- This snapshot includes v1.0.1 hardening (immutable financial records, strict RLS).
--- The MVP requires network access and does not implement offline writes. 
+-- The MVP requires network access and does not implement offline writes.
 -- Foreign keys are therefore enforced in PostgreSQL.
 
 BEGIN;
