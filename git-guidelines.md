@@ -2,7 +2,7 @@
 
 Combined reference for commit messages and release versioning.
 
-> **Customizing this document:** replace `code-name` with your project's code
+> **Customizing this document:** replace `frostbite` with your project's code
 > name, and replace `<feature1>`, `<feature2>`, … with the feature or
 > subsystem names that apply to your project.
 
@@ -54,25 +54,25 @@ Choose the most specific scope that still describes the whole commit:
 
 | Scope | When to use |
 |---|---|
-| `code-name-api/<feature>:` | Back-end API feature or major subsystem |
-| `code-name-web/<feature>:` | Front-end web app feature or major subsystem |
-| `code-name-app/<feature>:` | Android app feature or major subsystem |
-| `code-name-specs/<feature>:` | Specification content for a feature or major subsystem (the documents themselves, not code) |
-| `code-name-api:` | Cross-feature back-end API change |
-| `code-name-web:` | Cross-feature front-end web app change |
-| `code-name-app:` | Cross-feature Android app change |
-| `code-name-specs:` | Cross-feature specification change (shared conventions, structure, or templates) |
+| `frostbite-api/<feature>:` | Back-end API feature or major subsystem |
+| `frostbite-web/<feature>:` | Front-end web app feature or major subsystem |
+| `frostbite-app/<feature>:` | Android app feature or major subsystem |
+| `frostbite-specs/<feature>:` | Specification content for a feature or major subsystem (the documents themselves, not code) |
+| `frostbite-api:` | Cross-feature back-end API change |
+| `frostbite-web:` | Cross-feature front-end web app change |
+| `frostbite-app:` | Cross-feature Android app change |
+| `frostbite-specs:` | Cross-feature specification change (shared conventions, structure, or templates) |
 
 Use established feature names where applicable. Because every product belongs
 to one ecosystem, feature scopes are listed once and shared by all products
-(`code-name-api/auth:`, `code-name-web/auth:`, `code-name-app/auth:`, and so
+(`frostbite-api/auth:`, `frostbite-web/auth:`, `frostbite-app/auth:`, and so
 on). Add your own as `<feature1>`, `<feature2>`, and so on:
 
 `auth`, `sync`, `security`, `backup`, `restore`, `<feature1>`, `<feature2>`, …
 
-`code-name-specs` is a version-controlled repository of specifications, so
+`frostbite-specs` is a version-controlled repository of specifications, so
 its commits change the spec documents themselves, not code. A feature scope
-there (`code-name-specs/auth:`) means the specification *of* that feature. It
+there (`frostbite-specs/auth:`) means the specification *of* that feature. It
 also accepts spec-kind scopes that name the type of document being changed:
 `requirements`, `design`, `schema`, `contracts`. Use the feature scope when
 the change belongs to one feature, and the spec-kind scope when it applies
@@ -81,14 +81,14 @@ across features.
 Examples:
 
 ```
-code-name-app/<feature1>: Preserve drafts when switching tabs
-code-name-app/sync: Retry failed record pulls
-code-name-web/<feature1>: Show feedback on detail pages
-code-name-web/auth: Keep password errors beside the field
-code-name-web: Align shared page spacing across routes
-code-name-specs/auth: Define password reset flow
-code-name-specs/design: Add spacing tokens to the style guide
-code-name-specs/schema: Clarify soft-delete columns
+frostbite-app/<feature1>: Preserve drafts when switching tabs
+frostbite-app/sync: Retry failed record pulls
+frostbite-web/<feature1>: Show feedback on detail pages
+frostbite-web/auth: Keep password errors beside the field
+frostbite-web: Align shared page spacing across routes
+frostbite-specs/auth: Define password reset flow
+frostbite-specs/design: Add spacing tokens to the style guide
+frostbite-specs/schema: Clarify soft-delete columns
 ```
 
 Do not use generic scopes such as `ui:`, `api:`, or `core:` when a
@@ -103,8 +103,8 @@ Use these only when a product/feature scope does not fit:
 
 | Scope | When to use |
 |---|---|
-| `code-name-specs` | Cross-repository specifications, design specs, schema snapshots, migration docs |
-| `code-name-api` | Backend/API changes in the server repository |
+| `frostbite-specs` | Cross-repository specifications, design specs, schema snapshots, migration docs |
+| `frostbite-api` | Backend/API changes in the server repository |
 | `db` | Database-only changes not specific to one application |
 | `config` | Shared configuration or environment conventions |
 | `test` | Cross-cutting test utilities or test infrastructure |
@@ -267,8 +267,8 @@ If not, rewrite it.
 All products share one identity, so a tag shows which product it belongs to
 from its prefix alone.
 
-- **Code Name**: Code Name
-- **Short Code**: `CN`
+- **Code Name**: Frostbite
+- **Short Code**: `FB`
 
 #### Product prefixes
 
@@ -276,10 +276,10 @@ The prefix is one letter for the product followed by the ecosystem short code.
 
 | Product | Prefix | Formula |
 |---|---|---|
-| Web App Front-end (`code-name-web`) | `WCN` | `W` + `CN` |
-| Server/Back-end API (`code-name-api`) | `BCN` | `B` + `CN` |
-| Android App (`code-name-app`) | `ACN` | `A` + `CN` |
-| Specifications (`code-name-specs`) | `SCN` | `S` + `CN` |
+| Web App Front-end (`frostbite-web`) | `WFB` | `W` + `FB` |
+| Server/Back-end API (`frostbite-api`) | `BFB` | `B` + `FB` |
+| Android App (`frostbite-app`) | `AFB` | `A` + `FB` |
+| Specifications (`frostbite-specs`) | `SFB` | `S` + `FB` |
 
 ### Branching Models
 
@@ -347,16 +347,16 @@ The pre-release suffix identifies the candidate stage and iteration:
 - When a candidate passes its stage, advance to the next stage using that stage's base label. For example, `a2` passing advances to `b`; `b2` passing advances to `rc`.
 - When an `rc` candidate passes and is approved, deploy that exact candidate to production.
 
-Example for build `WCN.01.0.017`:
+Example for build `WFB.01.0.017`:
 
 | Result | Next candidate/action |
 |---|---|
-| Begin alpha testing | `WCN.01.0.017a` |
-| Alpha candidate has defects | `WCN.01.0.017a2` |
-| `a2` passes alpha | `WCN.01.0.017b` |
-| Beta candidate has defects | `WCN.01.0.017b2` |
-| `b2` passes beta | `WCN.01.0.017rc` |
-| RC candidate has defects | `WCN.01.0.017rc2` |
+| Begin alpha testing | `WFB.01.0.017a` |
+| Alpha candidate has defects | `WFB.01.0.017a2` |
+| `a2` passes alpha | `WFB.01.0.017b` |
+| Beta candidate has defects | `WFB.01.0.017b2` |
+| `b2` passes beta | `WFB.01.0.017rc` |
+| RC candidate has defects | `WFB.01.0.017rc2` |
 | `rc2` passes and is approved | Deploy the exact `rc2` candidate to production |
 
 The suffix does not increment `0X`, `Y`, or `00Z`. A corrected candidate is a
@@ -399,11 +399,11 @@ shown and are not normalized (for example, never collapse `01.0.001` into
 Example, the first two weekly release tags of the web app:
 
 ```
-WCN.01.0.001   ← first weekly release tag
-WCN.01.0.002   ← second weekly release tag
+WFB.01.0.001   ← first weekly release tag
+WFB.01.0.002   ← second weekly release tag
 ```
 
-- `<prefix>` — product prefix: `WCN`, `BCN`, `ACN`, or `SCN`
+- `<prefix>` — product prefix: `WFB`, `BFB`, `AFB`, or `SFB`
 - `0X` — Major, always zero-padded to 2 digits, starts at `01`
 - `Y` — Minor (maintenance branch), a single digit, starts at `0`. Reaching
   `9` is rare.
@@ -411,8 +411,8 @@ WCN.01.0.002   ← second weekly release tag
   starts at `001`. A year has 52 weeks and a lifecycle is only 3 to 12
   months, so exceeding `052` is unusual; the faster the cycle, the better.
 
-First release tags: `WCN.01.0.001`, `BCN.01.0.001`, `ACN.01.0.001`,
-`SCN.01.0.001`.
+First release tags: `WFB.01.0.001`, `BFB.01.0.001`, `AFB.01.0.001`,
+`SFB.01.0.001`.
 
 ### Rules
 
@@ -439,7 +439,7 @@ First release tags: `WCN.01.0.001`, `BCN.01.0.001`, `ACN.01.0.001`,
 #### Pre-release label (`Label`)
 
 - Appended directly to the Patch / build release (`00Z`) to identify the final testing stage of a development cycle.
-- These identifiers are equivalent to **GitHub tags** attached to specific commits (for example, `WCN.01.0.017a`, `WCN.01.0.017b`, and `WCN.01.0.017rc`); they are **not actual GitHub Releases**. A GitHub Release is a separate published entry that can be created from a selected tag. Applying a pre-release label does not itself create a GitHub Release.
+- These identifiers are equivalent to **GitHub tags** attached to specific commits (for example, `WFB.01.0.017a`, `WFB.01.0.017b`, and `WFB.01.0.017rc`); they are **not actual GitHub Releases**. A GitHub Release is a separate published entry that can be created from a selected tag. Applying a pre-release label does not itself create a GitHub Release.
 - Used only after all planned development work is complete and the WBS/Gantt chart is 100% complete. Remaining work is limited to testing, regression testing, and fixing defects.
 - Labels are used in this order:
   - `a` — Alpha testing.
@@ -449,22 +449,22 @@ First release tags: `WCN.01.0.001`, `BCN.01.0.001`, `ACN.01.0.001`,
 - Once a candidate passes testing with no remaining bugs requiring a fix, advance to the next stage. The numeric suffix does not carry over to the next stage.
 - Once an `rc` candidate passes final testing with no remaining bugs requiring a fix, deploy that release to production.
 
-Examples, using `WCN.01.0.017`:
+Examples, using `WFB.01.0.017`:
 
 | Situation | Next release |
 |---|---|
-| Development is complete; begin alpha testing | `WCN.01.0.017a` |
-| `a` has bugs; issue another alpha candidate | `WCN.01.0.017a2` |
-| `a2` has bugs; issue another alpha candidate | `WCN.01.0.017a3` |
-| Alpha testing passes; begin beta testing | `WCN.01.0.017b` |
-| `b` has bugs; issue another beta candidate | `WCN.01.0.017b2` |
-| Beta testing passes; begin release-candidate testing | `WCN.01.0.017rc` |
-| `rc` has bugs; issue another release candidate | `WCN.01.0.017rc2` |
+| Development is complete; begin alpha testing | `WFB.01.0.017a` |
+| `a` has bugs; issue another alpha candidate | `WFB.01.0.017a2` |
+| `a2` has bugs; issue another alpha candidate | `WFB.01.0.017a3` |
+| Alpha testing passes; begin beta testing | `WFB.01.0.017b` |
+| `b` has bugs; issue another beta candidate | `WFB.01.0.017b2` |
+| Beta testing passes; begin release-candidate testing | `WFB.01.0.017rc` |
+| `rc` has bugs; issue another release candidate | `WFB.01.0.017rc2` |
 | An `rc` candidate passes final testing | Deploy that candidate to production |
 
 The pre-release label is part of the release identifier and does not increment `0X`, `Y`, or `00Z`. A defect-fix candidate remains within the same stage and build number; the next development cycle or maintenance release follows the Major, Minor, and Patch rules above.
 
-#### Applying the rules to specifications (code-name-specs)
+#### Applying the rules to specifications (frostbite-specs)
 
 A specification repository follows the same format and weekly cadence, but
 nothing in it is deployed or run. Read the rules above as follows:
@@ -518,37 +518,37 @@ Follow these rules whenever you create release tags for a repository:
 - **`0X` stayed `01` and `Y` stayed `0`** across every tag: the history carries no approved new-major cycle and no production-deployment marker that would bump either. When a production deploy does happen, bump `Y` and reset `00Z` to `001` per the rules above.
 - Bucketing uses each commit's **committer date**.
 
-#### code-name-android — Android (ACN)
+#### frostbite-android — Android (AFB)
 
 | Tag | ISO week | Release date | Commit |
 | --- | --- | --- | --- |
 |  |  |  |  |
 
-Next release: **`ACN.01.0.001`**.
+Next release: **`AFB.01.0.001`**.
 
-#### code-name-web — web front-end (WCN)
-
-| Tag | ISO week | Release date | Commit |
-| --- | --- | --- | --- |
-|  |  |  |  |
-
-Next release: **`WCN.01.0.001`**.
-
-#### code-name-api — back-end api (BCN)
+#### frostbite-web — web front-end (WFB)
 
 | Tag | ISO week | Release date | Commit |
 | --- | --- | --- | --- |
 |  |  |  |  |
 
-Next release: **`BCN.01.0.001`**.
+Next release: **`WFB.01.0.001`**.
 
-#### code-name-specs — specifications (SCN)
+#### frostbite-api — back-end api (BFB)
 
 | Tag | ISO week | Release date | Commit |
 | --- | --- | --- | --- |
 |  |  |  |  |
 
-Next release: **`SCN.01.0.001`**.
+Next release: **`BFB.01.0.001`**.
+
+#### frostbite-specs — specifications (SFB)
+
+| Tag | ISO week | Release date | Commit |
+| --- | --- | --- | --- |
+|  |  |  |  |
+
+Next release: **`SFB.01.0.001`**.
 
 Tags follow the same derivation rules above. Once the first weekly release is
 cut, record it here in the same format.
@@ -556,4 +556,4 @@ cut, record it here in the same format.
 \* The release date is clamped forward from Friday because the last commit in
 that ISO week landed on a weekend. ISO 2026-W41 is still in progress on
 2026-10-05; its release tags, including the first release of a new
-code-name-app, should be cut after the Friday 2026-10-09 weekly cutoff.
+frostbite-app, should be cut after the Friday 2026-10-09 weekly cutoff.
